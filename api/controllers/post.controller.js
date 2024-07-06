@@ -28,7 +28,9 @@ export const getPosts = async (req, res) => {
 };
 
 export const getPost = async (req, res) => {
+ 
   const id = req.params.id;
+ 
   try {
     const post = await prisma.post.findUnique({
       where: { id },
@@ -43,7 +45,7 @@ export const getPost = async (req, res) => {
       },
     });
 
-    const token = req.cookies?.token;
+    const token = req.cookies.token;
 
     if (token) {
       jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
